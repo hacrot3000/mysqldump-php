@@ -122,7 +122,7 @@ class Mysqldump
         'compress' => Mysqldump::NONE,
         'init_commands' => array(),
         'no-data' => array(),
-        'query_part_limit' => 500,
+        'query_part_limit' => 5000,
         'if-not-exists' => false,
         'reset-auto-increment' => false,
         'add-drop-database' => false,
@@ -1502,9 +1502,16 @@ class CompressNone extends CompressManagerFactory
      */
     public function open($filename)
     {
-        $this->fileHandler = fopen($filename, "wb");
-        if (false === $this->fileHandler) {
-            throw new Exception("Output file is not writable");
+        if (empty($filename))
+        {
+            $this->fileHandler = 0;
+        }
+        else
+        {
+            $this->fileHandler = fopen($filename, "wb");
+            if (false === $this->fileHandler) {
+                throw new Exception("Output file is not writable");
+            }
         }
 
         return true;
@@ -1512,6 +1519,12 @@ class CompressNone extends CompressManagerFactory
 
     public function write($str)
     {
+        if (empty($this->fileHandler))
+        {
+            echo $str;
+            return strlen($str);
+        }
+
         $bytesWritten = fwrite($this->fileHandler, $str);
         if (false === $bytesWritten) {
             throw new Exception("Writting to file failed! Probably, there is no more free space left?");
@@ -1521,6 +1534,10 @@ class CompressNone extends CompressManagerFactory
 
     public function close()
     {
+        if (empty($this->fileHandler))
+        {
+            return true;
+        }
         return fclose($this->fileHandler);
     }
 }
