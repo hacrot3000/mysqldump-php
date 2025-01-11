@@ -6,15 +6,15 @@ MySQLDump - PHP
 * Add print the dump to console, just leave the filename empty when call start
 
 
-[Requirements](https://github.com/ifsnop/mysqldump-php#requirements) |
-[Installing](https://github.com/ifsnop/mysqldump-php#installing) |
-[Getting started](https://github.com/ifsnop/mysqldump-php#getting-started) |
-[API](https://github.com/ifsnop/mysqldump-php#constructor-and-default-parameters) |
-[Settings](https://github.com/ifsnop/mysqldump-php#dump-settings) |
-[PDO Settings](https://github.com/ifsnop/mysqldump-php#pdo-settings) |
-[TODO](https://github.com/ifsnop/mysqldump-php#todo) |
-[License](https://github.com/ifsnop/mysqldump-php#license) |
-[Credits](https://github.com/ifsnop/mysqldump-php#credits)
+[Requirements](#requirements) |
+[Installing](#installing) |
+[Getting started](#getting-started) |
+[API](#constructor-and-default-parameters) |
+[Settings](#dump-settings) |
+[PDO Settings](#pdo-settings) |
+[TODO](#todo) |
+[License](#license) |
+[Credits](#credits)
 
 [![Build Status](https://travis-ci.org/ifsnop/mysqldump-php.svg?branch=devel)](https://travis-ci.org/ifsnop/mysqldump-php)
 [![Total Downloads](https://poser.pugx.org/ifsnop/mysqldump-php/downloads)](https://packagist.org/packages/ifsnop/mysqldump-php)
@@ -222,6 +222,8 @@ $this->_dumpSettings = self::array_replace_recursive($dumpSettingsDefault, $dump
 
 ## Dump Settings
 
+- **query_part_limit**
+  - Default is 5000. The script will select target table part by part each 5000 records until end of table instead of select all records in a single query.
 - **include-tables**
   - Only include these tables (array of table names), include all if empty.
 - **exclude-tables**
