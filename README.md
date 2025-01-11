@@ -1,6 +1,13 @@
 MySQLDump - PHP
 =========
 
+Custom change on this fock:
+* Add setting 'query_part_limit' for very big tables. It avoid the timeout problem when cannot select all records in a single query.
+* Add print the dump to console, just leave the filename empty when call start
+
+=========
+
+
 [Requirements](https://github.com/ifsnop/mysqldump-php#requirements) |
 [Installing](https://github.com/ifsnop/mysqldump-php#installing) |
 [Getting started](https://github.com/ifsnop/mysqldump-php#getting-started) |
